@@ -3,23 +3,24 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Login</title>
-    <link rel="stylesheet" href="css/styles.css"> <!-- Link to your CSS file -->
+    <title>LOGIN</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="images/logo.jpg" type="image/x-icon">
 </head>
 <body>
 
 <header>
-    <h1>My Website</h1>
+    <h1>Care</h1>
     <nav>
-        <a href="#">Home</a>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
+        <a href="index.html">Home</a>
+        <a href="login.html">Login</a>
+        <a href="contactus.html">Contact</a>
     </nav>
 </header>
 
 <main>
     <h2 style="text-align: center;">Login</h2>
-    <form action="/login" method="POST">
+    <form action="login.html" method="POST">
         <label for="username">
             Username
             <input type="text" id="username" name="username" required />
@@ -32,10 +33,13 @@
 
         <button type="submit">Log In</button>
     </form>
+    <p class="form-note">
+        Already have an account? <a href="register.html">Register it here.</a>
+    </p>
 </main>
 
 <footer>
-    &copy; 2025 My Website. All rights reserved.
+    &copy; 2025 Care. All rights reserved.
 </footer>
 
 </body>

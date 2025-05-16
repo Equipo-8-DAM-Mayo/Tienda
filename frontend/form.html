@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrar Producto</title>
+    <title>Product Editor</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="images/logo.jpg" type="image/x-icon">
 </head>
 <body>
 <header>
@@ -17,21 +18,25 @@
 </header>
 <main>
     <form id="product-form">
-        <label>Nombre:
+        <label>Name:
             <input type="text" name="name" required>
         </label>
-        <label>Descripción:
+        <label>Description:
             <textarea name="description" required></textarea>
         </label>
-        <label>Precio:
+        <label>Price:
             <input type="number" name="price" step="0.01" required>
         </label>
-        <button type="submit">Guardar</button>
+        </label>
+        <label>Stock:
+            <input type="number" name="price" step="1" required>
+        </label>
+        <button type="submit">Save</button>
     </form>
 </main>
 
 <footer>
-    <p>&copy; 2025 Tu Empresa</p>
+    &copy; 2025 Care. All rights reserved.
 </footer>
 
 <script src="js/products.js"></script>

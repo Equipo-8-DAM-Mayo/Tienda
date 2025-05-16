@@ -1,5 +1,5 @@
 body {
-    background: images/logo.jpg;
+
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f4f7fa;
@@ -7,7 +7,7 @@ body {
 }
 
 header {
-  background-color: #0077cc;
+  background-color: #F2F0EB;
   color: #fff;
   padding: 1rem 2rem;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
