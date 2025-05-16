@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Editor</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="images/logo.jpg" type="image/x-icon">
+</head>
+<body>
+<header>
+    <img src="images/logo.jpg" alt="Care Logo" class="logo">
+    <h1>Care</h1>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="customers.html">Customers</a>
+    </nav>
+</header>
+
+<main>
+    <form id="product-form">
+        <label>Name:
+            <input type="text" name="name" required>
+        </label>
+        <label>Description:
+            <textarea name="description" required></textarea>
+        </label>
+        <label>Price:
+            <input type="number" name="price" step="0.01" required>
+        </label>
+        <label>Stock:
+            <input type="number" name="price" step="1" required>
+        </label>
+        <button type="submit">Save</button>
+    </form>
+</main>
+
+<footer>
+    &copy; 2025 Care. All rights reserved.
+</footer>
+
+<script src="js/customers.js"></script>
+</body>
+</html>
