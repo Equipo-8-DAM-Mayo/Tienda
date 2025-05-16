@@ -1,4 +1,5 @@
 body {
+    background: images/logo.jpg;
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f4f7fa;
@@ -124,6 +125,11 @@ button:hover {
   max-width: 600px;
   margin: auto;
 }
+p {
+text-align: center;
+margin-top: 1.5rem;
+}
+
 
 footer {
   text-align: center;

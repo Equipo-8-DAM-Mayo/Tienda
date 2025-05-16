@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register</title>
+  <link rel="stylesheet" href="css/styles.css"> <!-- CSS separado -->
+</head>
+<body>
+
+<header>
+  <h1>Care</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="login.html">Login</a>
+    <a href="contactus.html">Contact</a>
+  </nav>
+</header>
+<main>
+  <h2 class="centered-heading">Register</h2>
+  <form action="/register" method="POST">
+    <label for="username">
+      Username
+      <input type="text" id="username" name="username" required />
+    </label>
+
+    <label for="email">
+      Email
+      <input type="email" id="email" name="email" required />
+    </label>
+
+    <label for="password">
+      Password
+      <input type="password" id="password" name="password" required />
+    </label>
+
+    <label for="confirm-password">
+      Confirm Password
+      <input type="password" id="confirm-password" name="confirm_password" required />
+    </label>
+
+    <button type="submit">Sign Up</button>
+  </form>
+
+  <p class="form-note">
+    Already have an account? <a href="login.html">Log in here.</a>
+  </p>
+</main>
+
+<footer>
+  &copy; 2025 My Website. All rights reserved.
+</footer>
+
+</body>
+</html>
