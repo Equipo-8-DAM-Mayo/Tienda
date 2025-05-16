@@ -6,8 +6,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.*;
+import java.util.*;
 
 @WebServlet("/products")
 public class ProductServlet extends HttpServlet {
@@ -16,48 +16,41 @@ public class ProductServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        response.setContentType("text/html;charset=UTF-8");
-        try (Connection conn = DBConnection.getConnection();
-             PrintWriter out = response.getWriter()) {
+        try (Connection conn = DBConnection.getConnection()) {
 
+            // 🔁 Eliminar producto si viene el parámetro ?delete
             String deleteParam = request.getParameter("delete");
-
             if (deleteParam != null && !deleteParam.isEmpty()) {
                 int deleteId = Integer.parseInt(deleteParam);
                 try (PreparedStatement deleteStmt = conn.prepareStatement(
                         "DELETE FROM products WHERE product_id = ?")) {
                     deleteStmt.setInt(1, deleteId);
                     deleteStmt.executeUpdate();
-                    out.println("<p style='color:green;'>🗑️ Producto con ID " + deleteId + " eliminado.</p>");
                 }
+                response.sendRedirect("products"); // Redirige tras eliminar
+                return;
             }
+
+            // 📋 Listar productos
+            List<Map<String, Object>> products = new ArrayList<>();
 
             try (Statement stmt = conn.createStatement();
                  ResultSet rs = stmt.executeQuery("SELECT * FROM products")) {
 
-                out.println("<h1>Lista de productos</h1>");
-                out.println("<table border='1'>");
-                out.println("<tr><th>ID</th><th>Nombre</th><th>Descripción</th><th>Precio</th><th>Stock</th><th>Categoría</th><th>Acciones</th></tr>");
                 while (rs.next()) {
-                    int id = rs.getInt("product_id");
-                    String name = rs.getString("name");
-                    String desc = rs.getString("description");
-                    double price = rs.getDouble("price");
-                    int stock = rs.getInt("stock");
-                    String category = rs.getString("category");
-
-                    out.println("<tr>");
-                    out.println("<td>" + id + "</td>");
-                    out.println("<td>" + name + "</td>");
-                    out.println("<td>" + desc + "</td>");
-                    out.println("<td>" + price + " €</td>");
-                    out.println("<td>" + stock + "</td>");
-                    out.println("<td>" + category + "</td>");
-                    out.println("<td><a href='products?delete=" + id + "'>Eliminar</a></td>");
-                    out.println("</tr>");
+                    Map<String, Object> p = new HashMap<>();
+                    p.put("product_id", rs.getInt("product_id"));
+                    p.put("name", rs.getString("name"));
+                    p.put("description", rs.getString("description"));
+                    p.put("price", rs.getDouble("price"));
+                    p.put("stock", rs.getInt("stock"));
+                    p.put("category", rs.getString("category"));
+                    products.add(p);
                 }
-                out.println("</table>");
             }
+
+            request.setAttribute("products", products);
+            request.getRequestDispatcher("/products.jsp").forward(request, response);
 
         } catch (SQLException e) {
             throw new ServletException("Error al acceder a productos", e);
@@ -69,10 +62,8 @@ public class ProductServlet extends HttpServlet {
             throws ServletException, IOException {
 
         request.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html;charset=UTF-8");
 
-        try (Connection conn = DBConnection.getConnection();
-             PrintWriter out = response.getWriter()) {
+        try (Connection conn = DBConnection.getConnection()) {
 
             String name = request.getParameter("name");
             String description = request.getParameter("description");
@@ -80,9 +71,8 @@ public class ProductServlet extends HttpServlet {
             String stockStr = request.getParameter("stock");
             String category = request.getParameter("category");
 
-            // Validación básica (puedes extenderla)
             if (name == null || priceStr == null || stockStr == null) {
-                out.println("<p style='color:red;'>Faltan campos obligatorios.</p>");
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Faltan campos obligatorios.");
                 return;
             }
 
@@ -99,13 +89,13 @@ public class ProductServlet extends HttpServlet {
                 stmt.setString(5, category);
 
                 stmt.executeUpdate();
-                out.println("<p style='color:green;'>✅ Producto creado correctamente.</p>");
-                out.println("<a href='products'>Volver al listado</a>");
             }
+
+            // 🔁 Redirige al listado tras insertar
+            response.sendRedirect("products");
 
         } catch (SQLException | NumberFormatException e) {
             throw new ServletException("Error al crear producto", e);
         }
     }
-
 }
