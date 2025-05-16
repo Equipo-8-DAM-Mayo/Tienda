@@ -63,4 +63,49 @@ public class ProductServlet extends HttpServlet {
             throw new ServletException("Error al acceder a productos", e);
         }
     }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+
+        try (Connection conn = DBConnection.getConnection();
+             PrintWriter out = response.getWriter()) {
+
+            String name = request.getParameter("name");
+            String description = request.getParameter("description");
+            String priceStr = request.getParameter("price");
+            String stockStr = request.getParameter("stock");
+            String category = request.getParameter("category");
+
+            // Validación básica (puedes extenderla)
+            if (name == null || priceStr == null || stockStr == null) {
+                out.println("<p style='color:red;'>Faltan campos obligatorios.</p>");
+                return;
+            }
+
+            double price = Double.parseDouble(priceStr);
+            int stock = Integer.parseInt(stockStr);
+
+            try (PreparedStatement stmt = conn.prepareStatement(
+                    "INSERT INTO products (name, description, price, stock, category) VALUES (?, ?, ?, ?, ?)")) {
+
+                stmt.setString(1, name);
+                stmt.setString(2, description);
+                stmt.setDouble(3, price);
+                stmt.setInt(4, stock);
+                stmt.setString(5, category);
+
+                stmt.executeUpdate();
+                out.println("<p style='color:green;'>✅ Producto creado correctamente.</p>");
+                out.println("<a href='products'>Volver al listado</a>");
+            }
+
+        } catch (SQLException | NumberFormatException e) {
+            throw new ServletException("Error al crear producto", e);
+        }
+    }
+
 }
