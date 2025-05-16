@@ -1,30 +1,32 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.sql.*, com.tienda.utils.DBConnection" %>
-<%@ page import="java.text.DecimalFormat" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%
-    String idParam = request.getParameter("product_id");
-    int productId = -1;
+    String idParam = request.getParameter("customer_id");
+    int customerId = -1;
 
-    String name = "", description = "", category = "";
-    double price = 0.0;
-    int stock = 0;
+    String name = "", email = "", phone = "", address = "";
+    String registrationDate = "";
 
     if (idParam != null && !idParam.isEmpty()) {
-        productId = Integer.parseInt(idParam);
+        customerId = Integer.parseInt(idParam);
 
         try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM products WHERE product_id = ?")) {
+             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM customers WHERE customer_id = ?")) {
 
-            stmt.setInt(1, productId);
+            stmt.setInt(1, customerId);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     name = rs.getString("name");
-                    description = rs.getString("description");
-                    price = rs.getDouble("price");
-                    stock = rs.getInt("stock");
-                    category = rs.getString("category");
+                    email = rs.getString("email");
+                    phone = rs.getString("phone");
+                    address = rs.getString("address");
+                    Date date = rs.getDate("registration_date");
+
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    registrationDate = sdf.format(date);
                 } else {
-                    out.println("<p style='color:red;'>Producto no encontrado.</p>");
+                    out.println("<p style='color:red;'>Cliente no encontrado.</p>");
                     return;
                 }
             }
@@ -33,7 +35,7 @@
             return;
         }
     } else {
-        out.println("<p style='color:red;'>ID de producto no válido.</p>");
+        out.println("<p style='color:red;'>ID de cliente no válido.</p>");
         return;
     }
 %>
@@ -42,10 +44,9 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Editar Producto</title>
+    <title>Editar Cliente</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
-        /* Puedes reutilizar estilos del formulario anterior */
         body {
             font-family: 'Segoe UI', sans-serif;
             background: #f4f4f4;
@@ -72,7 +73,9 @@
         }
 
         input[type="text"],
-        input[type="number"] {
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"] {
             width: 100%;
             padding: 10px;
             margin-top: 5px;
@@ -117,30 +120,30 @@
 <body>
 <jsp:include page="includes/header.jspf" />
 
-<h1>✏️ Edit product</h1>
+<h1>✏️ Edit customer</h1>
 
 <div class="form-container">
-    <form method="post" action="edit-product">
-        <input type="hidden" name="product_id" value="<%= productId %>">
+    <form method="post" action="edit-customer">
+        <input type="hidden" name="customer_id" value="<%= customerId %>">
 
         <label for="name">Name *</label>
         <input type="text" id="name" name="name" required value="<%= name %>">
 
-        <label for="description">Description</label>
-        <input type="text" id="description" name="description" value="<%= description %>">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" value="<%= email %>">
 
-        <label for="price">Price (€) *</label>
-        <input type="number" id="price" name="price" step="0.01" required value="<%= price %>">
+        <label for="phone">Phone</label>
+        <input type="tel" id="phone" name="phone" value="<%= phone %>">
 
-        <label for="stock">Stock *</label>
-        <input type="number" id="stock" name="stock" required value="<%= stock %>">
+        <label for="address">Address</label>
+        <input type="text" id="address" name="address" value="<%= address %>">
 
-        <label for="category">Category</label>
-        <input type="text" id="category" name="category" value="<%= category %>">
+        <label for="registration_date">Registration date *</label>
+        <input type="date" id="registration_date" name="registration_date" required value="<%= registrationDate %>">
 
         <div class="actions">
             <button type="submit" class="btn btn-save">Save changes</button>
-            <a href="products" class="btn btn-cancel">Cancel</a>
+            <a href="customers" class="btn btn-cancel">Cancel</a>
         </div>
     </form>
 </div>

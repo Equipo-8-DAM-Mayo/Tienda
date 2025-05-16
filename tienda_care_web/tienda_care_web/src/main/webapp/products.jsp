@@ -84,17 +84,18 @@
         </style>
 </head>
 <body>
+<jsp:include page="includes/header.jspf" />
 
-<h1>📦 Productos en Tienda</h1>
+<h1>📦 Products in Store</h1>
 
 <div class="actions-top">
-    <a href="formulario_producto.jsp">➕ Crear producto</a>
+    <a href="formulario_producto.jsp">➕ Create product</a>
 </div>
 
 <table>
     <tr>
-        <th>ID</th><th>Nombre</th><th>Descripción</th>
-        <th>Precio</th><th>Stock</th><th>Categoría</th><th>Acciones</th>
+        <th>ID</th><th>Name</th><th>Descripción</th>
+        <th>Price</th><th>Stock</th><th>Category</th><th>Actions</th>
     </tr>
 
     <%

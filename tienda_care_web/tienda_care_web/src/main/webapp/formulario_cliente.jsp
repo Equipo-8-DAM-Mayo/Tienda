@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Crear Producto</title>
+    <title>Crear Cliente</title>
     <link rel="stylesheet" href="css/style.css">
     <style>
         body {
@@ -32,7 +32,9 @@
         }
 
         input[type="text"],
-        input[type="number"] {
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"] {
             width: 100%;
             padding: 10px;
             margin-top: 5px;
@@ -77,28 +79,28 @@
 <body>
 <jsp:include page="includes/header.jspf" />
 
-<h1>➕ Create new product</h1>
+<h1>➕ Create new customer</h1>
 
 <div class="form-container">
-    <form method="post" action="products">
+    <form method="post" action="customers">
         <label for="name">Name *</label>
         <input type="text" id="name" name="name" required>
 
-        <label for="description">Description</label>
-        <input type="text" id="description" name="description">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email">
 
-        <label for="price">Price (€) *</label>
-        <input type="number" id="price" name="price" step="0.01" required>
+        <label for="phone">Phone</label>
+        <input type="tel" id="phone" name="phone">
 
-        <label for="stock">Stock *</label>
-        <input type="number" id="stock" name="stock" required>
+        <label for="address">Address</label>
+        <input type="text" id="address" name="address">
 
-        <label for="category">Category</label>
-        <input type="text" id="category" name="category">
+        <label for="registration_date">Registration date *</label>
+        <input type="date" id="registration_date" name="registration_date" required>
 
         <div class="actions">
-            <button type="submit" class="btn btn-save">Save changes</button>
-            <a href="products" class="btn btn-cancel">Cancel</a>
+            <button type="submit" class="btn btn-save">Save customer</button>
+            <a href="customers" class="btn btn-cancel">Cancel</a>
         </div>
     </form>
 </div>
