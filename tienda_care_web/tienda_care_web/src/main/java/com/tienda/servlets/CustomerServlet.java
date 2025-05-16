@@ -6,8 +6,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.*;
+import java.sql.Date;
+import java.util.*;
 
 @WebServlet("/customers")
 public class CustomerServlet extends HttpServlet {
@@ -16,92 +17,92 @@ public class CustomerServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        out.println("<html><body>");
-        out.println("<h2>Customer List</h2>");
-
-        String deleteParam = request.getParameter("delete");
-
         try (Connection conn = DBConnection.getConnection()) {
 
-            // Si hay parámetro delete, eliminamos primero las compras y luego el cliente
+            // 🔁 Eliminar cliente si viene ?delete
+            String deleteParam = request.getParameter("delete");
             if (deleteParam != null && !deleteParam.isEmpty()) {
                 int deleteId = Integer.parseInt(deleteParam);
 
-                // Eliminar primero las compras asociadas a ese cliente
+                // Primero eliminamos las compras asociadas
                 try (PreparedStatement deletePurchases = conn.prepareStatement(
                         "DELETE FROM purchases WHERE customer_id = ?")) {
                     deletePurchases.setInt(1, deleteId);
                     deletePurchases.executeUpdate();
                 }
 
-                // Ahora sí, eliminar el cliente
+                // Luego eliminamos el cliente
                 try (PreparedStatement deleteCustomer = conn.prepareStatement(
                         "DELETE FROM customers WHERE customer_id = ?")) {
                     deleteCustomer.setInt(1, deleteId);
                     deleteCustomer.executeUpdate();
-                    out.println("<p style='color:green;'>🗑️ Cliente con ID " + deleteId + " eliminado.</p>");
+                }
+
+                response.sendRedirect("customers");
+                return;
+            }
+
+            // 📋 Listar clientes
+            List<Map<String, Object>> customers = new ArrayList<>();
+
+            try (Statement stmt = conn.createStatement();
+                 ResultSet rs = stmt.executeQuery("SELECT * FROM customers")) {
+
+                while (rs.next()) {
+                    Map<String, Object> c = new HashMap<>();
+                    c.put("id", rs.getInt("customer_id"));
+                    c.put("name", rs.getString("name"));
+                    c.put("email", rs.getString("email"));
+                    c.put("phone", rs.getString("phone"));
+                    c.put("address", rs.getString("address"));
+                    c.put("registration_date", rs.getDate("registration_date"));
+                    customers.add(c);
                 }
             }
 
+            request.setAttribute("customers", customers);
+            request.getRequestDispatcher("/customers.jsp").forward(request, response);
 
-            // Mostramos listado actualizado
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM customers");
-
-            boolean hasData = false;
-            while (rs.next()) {
-                hasData = true;
-                int id = rs.getInt("customer_id");
-                out.println("<p><strong>" + rs.getString("name") + "</strong> - " + rs.getString("email")
-                        + " <a href='customers?delete=" + id + "' onclick=\"return confirm('¿Eliminar este cliente?');\">Eliminar</a></p>");
-            }
-
-            if (!hasData) {
-                out.println("<p><em>ℹ No hay clientes en la base de datos.</em></p>");
-            }
-
-            rs.close();
-            stmt.close();
-
-        } catch (Exception e) {
-            out.println("<p style='color:red;'>❌ Error detectado:</p>");
-            out.println("<pre>" + e.toString() + "</pre>");
+        } catch (SQLException e) {
+            throw new ServletException("Error al acceder a clientes", e);
         }
-
-        out.println("</body></html>");
-        out.close();
     }
-
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        request.setCharacterEncoding("UTF-8"); // Para permitir tildes y ñ
+        request.setCharacterEncoding("UTF-8");
 
-        String name = request.getParameter("name");
-        String email = request.getParameter("email");
-        String phone = request.getParameter("phone");
-        String address = request.getParameter("address");
+        try (Connection conn = DBConnection.getConnection()) {
 
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(
-                     "INSERT INTO customers (name, email, phone, address) VALUES (?, ?, ?, ?)")) {
+            String name = request.getParameter("name");
+            String email = request.getParameter("email");
+            String phone = request.getParameter("phone");
+            String address = request.getParameter("address");
+            String registrationDate = request.getParameter("registration_date");
 
-            stmt.setString(1, name);
-            stmt.setString(2, email);
-            stmt.setString(3, phone);
-            stmt.setString(4, address);
-            stmt.executeUpdate();
+            if (name == null || registrationDate == null) {
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Faltan campos obligatorios.");
+                return;
+            }
 
-            // Redirigir de nuevo al listado tras insertar
+            String sql = "INSERT INTO customers (name, email, phone, address, registration_date) VALUES (?, ?, ?, ?, ?)";
+
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setString(1, name);
+                stmt.setString(2, email);
+                stmt.setString(3, phone);
+                stmt.setString(4, address);
+                stmt.setDate(5, Date.valueOf(registrationDate)); // formato yyyy-MM-dd
+
+                stmt.executeUpdate();
+            }
+
             response.sendRedirect("customers");
 
-        } catch (SQLException e) {
-            throw new ServletException("Insert failed", e);
+        } catch (SQLException | IllegalArgumentException e) {
+            throw new ServletException("Error al crear cliente", e);
         }
     }
 }
-

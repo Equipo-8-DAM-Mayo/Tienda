@@ -1,0 +1,35 @@
+<!-- HEADER DE NAVEGACIÓN -->
+<header style="
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #007bff;
+    color: white;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+    border-radius: 0 0 10px 10px;
+">
+    <!-- LOGO -->
+    <div>
+        <a href="index.jsp" style="display: inline-block;">
+            <img src="img/logo.png" alt="Logo TiendaCare" style="height: 40px; vertical-align: middle;">
+        </a>
+    </div>
+
+    <!-- ENLACES -->
+    <nav>
+        <a href="products" style="
+            margin-left: 20px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        ">Product</a>
+        <a href="customers" style="
+            margin-left: 20px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        ">Customers</a>
+    </nav>
+</header>
