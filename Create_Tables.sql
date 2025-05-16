@@ -9,7 +9,7 @@ CREATE TABLE customers (
     email VARCHAR(100) UNIQUE,
     phone VARCHAR(15),
     address TEXT,
-    registration_date DATE DEFAULT CURRENT_DATE
+    registration_date DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Table: products
@@ -28,7 +28,7 @@ CREATE TABLE purchases (
     customer_id INT,
     product_id INT,
     quantity INT NOT NULL,
-    purchase_date DATE DEFAULT CURRENT_DATE,
+    purchase_date DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (customer_id) REFERENCES customers(customer_id),
     FOREIGN KEY (product_id) REFERENCES products(product_id)
 );
