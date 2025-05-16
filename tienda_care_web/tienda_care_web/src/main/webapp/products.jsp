@@ -111,7 +111,7 @@
         <td><%= p.get("stock") %></td>
         <td><%= p.get("category") %></td>
         <td>
-            <a class="btn btn-edit" href="edit_product.jsp?id=<%= p.get("product_id") %>">Editar</a>
+            <a class="btn btn-edit" href="edit_product.jsp?product_id=<%= p.get("product_id") %>">Editar</a>
             <a class="btn btn-delete" href="products?delete=<%= p.get("product_id") %>"
                onclick="return confirm('¿Estás seguro de que deseas eliminar este producto?')">Eliminar</a>
         </td>
