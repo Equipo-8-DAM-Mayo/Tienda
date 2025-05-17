@@ -5,7 +5,8 @@
 body {
     font-family: 'Segoe UI', sans-serif;
     background: #f4f4f4;
-    margin: 40px;
+    margin: 0;
+    padding: 0;
 }
 h1 {
     text-align: center;
@@ -237,4 +238,51 @@ footer {
     font-size: 0.8rem;
     padding: 0.75rem;
   }
+}
+
+
+/* Estilo para formularios de creación */
+form.create-form .btn-save {
+    background-color: #28a745;
+    color: white;
+}
+form.create-form .btn-save:hover {
+    background-color: #218838;
+}
+
+/* Estilo para formularios de edición */
+form.edit-form .btn-save {
+    background-color: #ffc107;
+    color: black;
+}
+form.edit-form .btn-save:hover {
+    background-color: #e0a800;
+}
+
+/*Tarjetas*/
+
+.product-card {
+    position: relative;
+    overflow: hidden;
+    max-height: 260px;
+    cursor: pointer;
+    transition: max-height 0.4s ease;
+}
+
+.product-card.expanded {
+    max-height: 600px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+}
+
+.product-details {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.4s ease;
+}
+
+.product-card.expanded .product-details {
+    opacity: 1;
+    max-height: 300px;
+    margin-top: 10px;
 }
