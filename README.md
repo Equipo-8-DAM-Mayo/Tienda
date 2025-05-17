@@ -42,7 +42,6 @@ Antes de ejecutar la aplicación, asegúrate de tener instalado:
 
 ### 1. Clonar el repositorio
 
-```bash
 git clone https://github.com/Equipo-8-DAM-Mayo/tienda_care.git
 cd tienda_care
 
