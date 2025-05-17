@@ -46,10 +46,10 @@
                     <h3 class="h5 text-primary">White T-shirt</h3>
                     <p>Classic cotton tee, breathable and soft.</p>
                     <div class="product-details">
-                        <p><strong>Color:</strong> Blanco</p>
-                        <p><strong>Tallas:</strong> S, M, L, XL</p>
-                        <p><strong>Precio:</strong> 19.99 €</p>
-                        <p><strong>Material:</strong> 100% algodón</p>
+                        <p><strong>Color:</strong> White</p>
+                        <p><strong>Sizes:</strong> S, M, L, XL</p>
+                        <p><strong>Price:</strong> 19.99 €</p>
+                        <p><strong>Material:</strong> 100% cotton</p>
                     </div>
                 </div>
             </div>
@@ -62,10 +62,10 @@
                     <h3 class="h5 text-primary">Denim Jacket</h3>
                     <p>Stylish and warm for every occasion.</p>
                     <div class="product-details">
-                        <p><strong>Color:</strong> Azul Burberry</p>
-                        <p><strong>Tallas:</strong> M, L, XL</p>
-                        <p><strong>Precio:</strong> 49.99 €</p>
-                        <p><strong>Material:</strong> Mezcla de algodón y poliéster</p>
+                        <p><strong>Color:</strong> Blue Burberry</p>
+                        <p><strong>Sizes:</strong> M, L, XL</p>
+                        <p><strong>Price:</strong> 49.99 €</p>
+                        <p><strong>Material:</strong> Cotton and polyester blend</p>
                     </div>
                 </div>
             </div>
@@ -84,10 +84,10 @@
                     <h3 class="h5 text-primary">Black Jeans</h3>
                     <p>Skinny fit with stretch for comfort.</p>
                     <div class="product-details">
-                        <p><strong>Color:</strong> Negro</p>
-                        <p><strong>Tallas:</strong> 36, 38, 40</p>
-                        <p><strong>Precio:</strong> 34.90 €</p>
-                        <p><strong>Composición:</strong> 98% algodón, 2% elastano</p>
+                        <p><strong>Color:</strong> Black</p>
+                        <p><strong>Sizes:</strong> 36, 38, 40</p>
+                        <p><strong>Price:</strong> 34.90 €</p>
+                        <p><strong>Composition:</strong> 98% cotton, 2% elastane</p>
                     </div>
                 </div>
             </div>
@@ -100,10 +100,10 @@
                     <h3 class="h5 text-primary">Khaki Shorts</h3>
                     <p>Perfect for summer days.</p>
                     <div class="product-details">
-                        <p><strong>Color:</strong> Caqui</p>
-                        <p><strong>Tallas:</strong> S, M, L</p>
-                        <p><strong>Precio:</strong> 24.99 €</p>
-                        <p><strong>Material:</strong> Lino y algodón</p>
+                        <p><strong>Color:</strong> Khaki</p>
+                        <p><strong>Sizes:</strong> S, M, L</p>
+                        <p><strong>Price:</strong> 24.99 €</p>
+                        <p><strong>Material:</strong> Linen and cotton</p>
                     </div>
                 </div>
             </div>
