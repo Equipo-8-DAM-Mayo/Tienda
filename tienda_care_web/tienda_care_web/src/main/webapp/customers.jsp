@@ -7,84 +7,18 @@
     <meta charset="UTF-8">
     <title>Gestión de Clientes</title>
     <link rel="stylesheet" href="css/style.css">
-    <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background: #f4f4f4;
-            margin: 40px;
-        }
 
-        h1 {
-            text-align: center;
-        }
-
-        .actions-top {
-            display: flex;
-            justify-content: end;
-            margin-bottom: 20px;
-        }
-
-        .actions-top a {
-            background-color: #28a745;
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: bold;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background: white;
-            box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-        }
-
-        th, td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #007bff;
-            color: white;
-        }
-
-        tr:hover {
-            background-color: #f1f1f1;
-        }
-
-        .btn {
-            padding: 6px 12px;
-            border: none;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .btn-delete {
-            background-color: #dc3545;
-            color: white;
-        }
-
-        .btn-edit {
-            background-color: #ffc107;
-            color: black;
-        }
-
-        .btn-delete:hover {
-            background-color: #c82333;
-        }
-
-        .btn-edit:hover {
-            background-color: #e0a800;
-        }
-    </style>
 </head>
 <body>
-<jsp:include page="includes/header.jspf" />
+<header>
+    <img src="img/logo.png" alt="Care Logo" class="logo">
+    <h1>Care</h1>
+    <nav>
+        <a href="index.jsp">Home</a>
+        <a href="products">Products</a>
+        <a href="customers">Customers</a>
+    </nav>
+</header>
 
 
 <h1>👥 Registered customers</h1>

@@ -1,0 +1,240 @@
+
+/* === Unificado style.css === */
+
+/* === Estilos de customers.jsp === */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #f4f4f4;
+    margin: 40px;
+}
+h1 {
+    text-align: center;
+}
+.actions-top {
+    display: flex;
+    justify-content: end;
+    margin-bottom: 20px;
+}
+.actions-top a {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+th {
+    background-color: #007bff;
+    color: white;
+}
+tr:hover {
+    background-color: #f1f1f1;
+}
+.btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+.btn-delete {
+    background-color: #dc3545;
+    color: white;
+}
+.btn-edit {
+    background-color: #ffc107;
+    color: black;
+}
+.btn-delete:hover {
+    background-color: #c82333;
+}
+.btn-edit:hover {
+    background-color: #e0a800;
+}
+
+/* === Estilos de edit_customer.jsp + edit_product.jsp === */
+.form-container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 600px;
+    margin: auto;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+}
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+.actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+.btn-save {
+    background-color: #ffc107;
+    color: black;
+}
+.btn-save:hover {
+    background-color: #e0a800;
+}
+.btn-cancel {
+    background-color: #6c757d;
+    color: white;
+}
+.btn-cancel:hover {
+    background-color: #5a6268;
+}
+
+/* === Estilos de formulario_cliente.jsp + formulario_producto.jsp === */
+.btn-save {
+    background-color: #28a745;
+    color: white;
+}
+.btn-save:hover {
+    background-color: #218838;
+}
+
+/* === Estilos de index.jsp === */
+header {
+  background-color: #F2F0EB;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+.logo {
+  height: 40px;
+  width: auto;
+}
+header h1 {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  font-size: 1.8rem;
+  color: #000;
+  white-space: nowrap;
+}
+nav {
+  display: flex;
+  gap: 1.2rem;
+}
+nav a {
+  color: #000;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+nav a:hover {
+  color: #333;
+}
+main {
+  padding: 2rem;
+  max-width: 1000px;
+  margin: auto;
+}
+.section-title {
+  text-align: center;
+  color: #000;
+  margin-bottom: 1rem;
+}
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.product-card {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+  font-size: 0.9rem;
+}
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+.product-image {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+}
+.product-card h3 {
+  margin-top: 0;
+  color: #0077cc;
+  font-size: 1.1rem;
+}
+footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: #222;
+  color: white;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  font-size: 0.9rem;
+}
+@media (max-width: 600px) {
+  header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    height: auto;
+    padding: 1rem;
+  }
+  .logo {
+    height: 30px;
+    margin-bottom: 0.5rem;
+  }
+  header h1 {
+    position: static;
+    transform: none;
+    margin-bottom: 0.5rem;
+  }
+  nav {
+    position: static;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  main {
+    padding: 1rem;
+  }
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+  footer {
+    font-size: 0.8rem;
+    padding: 0.75rem;
+  }
+}
